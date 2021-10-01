@@ -1,15 +1,15 @@
 package ru.mephi.lab1;
 
 class Node {
-    Object key;
-    Object value;
+    private Object key;
+    private Object value;
 
-    Node(Object key, Object value){
+    Node(Object key, Object value) {
         this.key = key;
         this.value = value;
     }
 
-    public Object getKey(){
+    public Object getKey() {
         return key;
     }
 
@@ -17,16 +17,16 @@ class Node {
         this.key = key;
     }
 
-    public Object getValue(){
+    public Object getValue() {
         return value;
     }
 
-    public void setValue(Object value){
+    public void setValue(Object value) {
         this.value = value;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         String str = "Key: " + key + " Value: " + value;
         return str;
     }
