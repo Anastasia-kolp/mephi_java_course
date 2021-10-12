@@ -1,8 +1,8 @@
 package ru.mephi.lab2.hw;
 
 public class SortMerge {
-    private static boolean isSorted(ListInt list){
-        for (int i = 0; i < list.getSize() - 1; i++){
+    private static boolean isSorted(ListInt list) {
+        for (int i = 0; i < list.getSize() - 1; i++) {
             if (list.get(i) > list.get(i + 1))
                 return false;
         }
@@ -46,8 +46,7 @@ public class SortMerge {
         try {
             ListInt result = test.merge(list1, list2);
             System.out.println("Result: " + test.merge(list1, list2));
-        }
-        catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
         }
     }
