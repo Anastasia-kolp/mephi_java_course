@@ -2,6 +2,7 @@ package ru.mephi.hw3;
 
 import ru.mephi.lab3.Employee;
 
+import java.util.List;
 import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -11,7 +12,8 @@ public class ApplicationLambda {
     public static void main(String... args) {
         BiPredicate<Employee, String> employeeBiPredicate = (t, s) -> t.getDept().equals(s);
 
-        Function<Employee, Integer> employeeFunction = t -> t.getAge();
+        Function<Employee, String> employeeFunction1 = t -> "Telephone number: " + t.getPhone();
+        Function<Employee, String> employeeFunction2 = t -> "Surname: " + t.getSurName();
 
         Consumer<Employee> employeeConsumer = t -> System.out.println("Name: " + t.getGivenName() + " Surname: " + t.getSurName());
 
@@ -22,22 +24,22 @@ public class ApplicationLambda {
         list.add(employeeSupplier.get());
 
         System.out.println("List of employees:");
-        list.stream().forEach(t -> employeeConsumer.accept(t));
+        list.forEach(t -> employeeConsumer.accept(t));
 
-        System.out.println("Average age of company: ");
-        int average = 0;
-        for (int i = 0; i < list.size(); i++) {
-            average += employeeFunction.apply(list.get(i));
+        System.out.println("===========================================");
+
+        for (Employee employee : list) {
+            System.out.println(employeeFunction2.apply(employee));
+            System.out.println(employeeFunction1.apply(employee));
+            System.out.println("===========================================");
+
         }
-        average /= list.size();
-        System.out.println(average);
-
         System.out.println("Average age of IT departament: ");
-        average = 0;
+        int average = 0;
         int m = 0;
-        for (int i = 0; i < list.size(); i++) {
-            if (employeeBiPredicate.test(list.get(i), "IT")) {
-                average += employeeFunction.apply(list.get(i));
+        for (Employee employee : list) {
+            if (employeeBiPredicate.test(employee, "IT")) {
+                average += employee.getAge();
                 m++;
             }
         }

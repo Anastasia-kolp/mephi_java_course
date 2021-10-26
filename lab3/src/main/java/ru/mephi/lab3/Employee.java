@@ -136,11 +136,7 @@ public class Employee {
 
     public void setAge(int age) {
         if (age > 0) {
-            if (age > 85) {
-                this.age = 85;
-            } else {
-                this.age = age;
-            }
+            this.age = Math.min(age, 85);
         } else {
             throw new IllegalArgumentException("Age should be more than 0!");
         }
