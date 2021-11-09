@@ -5,21 +5,6 @@ import java.util.List;
 
 public class Employee {
 
-    public enum roles {
-        STAFF(0.1), MANAGER(0.2), EXECUTIVE(0.3);
-        private final double premium;
-
-        roles(double v) {
-            this.premium = v * 100000;
-        }
-
-        public double getPremium(){
-            return premium;
-        }
-    }
-
-    public enum genders {MALE, FEMALE}
-
     private String givenName;
     private String surName;
     private int age;
@@ -32,6 +17,7 @@ public class Employee {
     private String city;
     private String state;
     private short code;
+    private int salary;
 
     protected boolean checkPhone(long phone) {
         return phone <= 99999999999L && phone >= 10000000000L;
@@ -121,6 +107,15 @@ public class Employee {
             }
         }
 
+        public Builder setSalary(int salary) {
+            if (salary > 0) {
+                createEmployee.salary = salary;
+                return this;
+            } else {
+                throw new IllegalArgumentException("Salary should be more than 0!");
+            }
+        }
+
         public Employee build() {
             return createEmployee;
         }
@@ -142,11 +137,11 @@ public class Employee {
         }
     }
 
-    public void setGender(Employee.genders gender) {
+    public void setGender(genders gender) {
         this.gender = gender;
     }
 
-    public void setRole(Employee.roles role) {
+    public void setRole(roles role) {
         this.role = role;
     }
 
@@ -186,6 +181,14 @@ public class Employee {
         }
     }
 
+    public void setSalary(int salary) {
+        if (salary > 0) {
+            this.salary = salary;
+        } else {
+            throw new IllegalArgumentException("Salary should be more than 0!");
+        }
+    }
+
     public String getGivenName() {
         return givenName;
     }
@@ -198,11 +201,11 @@ public class Employee {
         return age;
     }
 
-    public Employee.genders getGender() {
+    public genders getGender() {
         return gender;
     }
 
-    public Employee.roles getRole() {
+    public roles getRole() {
         return role;
     }
 
@@ -234,6 +237,10 @@ public class Employee {
         return code;
     }
 
+    public int getSalary() {
+        return salary;
+    }
+
     @Override
     public String toString() {
         return "Employee(" + givenName +
@@ -247,15 +254,15 @@ public class Employee {
                 ", Address: " + address +
                 ", " + city +
                 ", " + state +
-                ", State code: " + code +
+                ", State code: " + code + ", Salary: " + salary +
                 ')';
     }
 
-    public List<Employee> createShortList() {
+    public static List<Employee> createShortList() {
         List<Employee> shortList = new ArrayList<>();
         String[] names = {"Ivan", "Olga", "Artem", "Anna", "Dmitriy", "Oleg", "Anastasia"};
         String[] surNames = {"Ivanov", "Kostuhina", "Petrov", "Petriga", "Morgunov", "Sidyakin", "Kolpakova"};
-        int[] ages = {25, 35, 40, 18, 50, 90, 20};
+        int[] ages = {25, 35, 40, 18, 50, 84, 20};
         genders[] gender = {genders.MALE, genders.FEMALE, genders.MALE, genders.FEMALE, genders.MALE, genders.MALE, genders.FEMALE};
         roles[] role = {roles.STAFF, roles.EXECUTIVE, roles.EXECUTIVE, roles.MANAGER, roles.STAFF, roles.STAFF, roles.MANAGER};
         String[] depts = {"Human Resources", "Laboratory", "Building", "Bookkeeping", "IT", "Design", "IT"};
@@ -265,9 +272,10 @@ public class Employee {
         String[] cities = {"Saint-Petersburg", "Moscow", "Vladimir", "Rome", "Kaluga", "Saint-Petersburg", "Moscow"};
         String[] states = {"Saint-Petersburg", "Moscow", "Vladimirskaya", "Rome", "Kalugskaya", "Saint-Petersburg", "Moscow"};
         short[] codes = {178, 777, 33, 12, 40, 98, 197};
+        int[] salaries = {50000, 100000, 120000, 70000, 45000, 40000, 80000};
 
         for (int i = 0; i < 7; i++) {
-            Employee employee = new Builder().setName(names[i]).setSurName(surNames[i]).setAge(ages[i]).setGender(gender[i]).setRole(role[i]).setDept(depts[i]).seteMail(eMails[i]).setPhone(phones[i]).setAddress(addresses[i]).setCity(cities[i]).setState(states[i]).setCode(codes[i]).build();
+            Employee employee = new Builder().setName(names[i]).setSurName(surNames[i]).setAge(ages[i]).setGender(gender[i]).setRole(role[i]).setDept(depts[i]).seteMail(eMails[i]).setPhone(phones[i]).setAddress(addresses[i]).setCity(cities[i]).setState(states[i]).setCode(codes[i]).setSalary(salaries[i]).build();
             shortList.add(employee);
         }
         return shortList;

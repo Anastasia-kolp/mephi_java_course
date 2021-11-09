@@ -6,13 +6,13 @@ public class Accountant {
     public static void payPremium(Employee employee) {
         switch (employee.getRole()) {
             case STAFF:
-                System.out.println("Premium 10% (" + employee.getRole().getPremium() + ") is paid for " + employee);
+                System.out.println("Premium 10% (" + employee.getRole().getProcent() * employee.getSalary() + ") is paid for " + employee.getGivenName() + " " + employee.getSurName());
                 break;
             case MANAGER:
-                System.out.println("Premium 20% (" + employee.getRole().getPremium() + ") is paid for " + employee);
+                System.out.println("Premium 20% (" + employee.getRole().getProcent() * employee.getSalary() + ") is paid for " + employee.getGivenName() + " " + employee.getSurName());
                 break;
             case EXECUTIVE:
-                System.out.println("Premium 30% (" + employee.getRole().getPremium() + ") is paid for " + employee);
+                System.out.println("Premium 30% (" + employee.getRole().getProcent() * employee.getSalary() + ") is paid for " + employee.getGivenName() + " " + employee.getSurName());
                 break;
         }
     }
@@ -20,22 +20,22 @@ public class Accountant {
     public static void paySalary(Employee employee) {
         switch (employee.getRole()) {
             case STAFF:
-                System.out.println("Salary (" + employee.getRole().getPremium() * 10 / 2 + ") is paid for " + employee);
+                System.out.println("Salary (" + employee.getSalary() + ") is paid for " + employee.getGivenName() + " " + employee.getSurName());
                 break;
             case MANAGER:
-                System.out.println("Salary (" + employee.getRole().getPremium() * 4 + ") is paid for " + employee);
+                System.out.println("Salary (" + employee.getSalary() + ") is paid for " + employee.getGivenName() + " " + employee.getSurName());
                 break;
             case EXECUTIVE:
-                System.out.println("Salary (" + employee.getRole().getPremium() * 10 / 3 + ") is paid for " + employee);
+                System.out.println("Salary (" + employee.getSalary() + ") is paid for " + employee.getGivenName() + " " + employee.getSurName());
                 break;
         }
     }
 
-    public static void main(String... args){
+    public static void main(String... args) {
         Employee employee = new Employee();
         List<Employee> myList = employee.createShortList();
         myList.stream()
-                .filter(x -> x.getGender().equals(Employee.genders.FEMALE))
+                .filter(x -> x.getGender().equals(genders.FEMALE))
                 .forEach(x -> Accountant.payPremium(x));
         System.out.println("");
         myList.stream()
@@ -47,11 +47,11 @@ public class Accountant {
                 .forEach(x -> Accountant.payPremium(x));
         System.out.println("");
         myList.stream()
-                .filter(x -> x.getRole().equals(Employee.roles.MANAGER))
+                .filter(x -> x.getRole().equals(roles.MANAGER))
                 .forEach(x -> Accountant.paySalary(x));
         System.out.println("");
         myList.stream()
-                .filter(x -> x.getRole().equals(Employee.roles.STAFF))
+                .filter(x -> x.getRole().equals(roles.STAFF))
                 .forEach(x -> Accountant.payPremium(x));
     }
 }
