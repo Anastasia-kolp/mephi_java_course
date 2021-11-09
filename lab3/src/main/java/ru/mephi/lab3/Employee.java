@@ -8,8 +8,8 @@ public class Employee {
     private String givenName;
     private String surName;
     private int age;
-    private genders gender;
-    private roles role;
+    private Genders gender;
+    private Roles role;
     private String dept;
     private String eMail;
     private long phone;
@@ -54,12 +54,12 @@ public class Employee {
             }
         }
 
-        public Builder setGender(genders gender) {
+        public Builder setGender(Genders gender) {
             createEmployee.gender = gender;
             return this;
         }
 
-        public Builder setRole(roles role) {
+        public Builder setRole(Roles role) {
             createEmployee.role = role;
             return this;
         }
@@ -137,11 +137,11 @@ public class Employee {
         }
     }
 
-    public void setGender(genders gender) {
+    public void setGender(Genders gender) {
         this.gender = gender;
     }
 
-    public void setRole(roles role) {
+    public void setRole(Roles role) {
         this.role = role;
     }
 
@@ -201,11 +201,11 @@ public class Employee {
         return age;
     }
 
-    public genders getGender() {
+    public Genders getGender() {
         return gender;
     }
 
-    public roles getRole() {
+    public Roles getRole() {
         return role;
     }
 
@@ -263,8 +263,8 @@ public class Employee {
         String[] names = {"Ivan", "Olga", "Artem", "Anna", "Dmitriy", "Oleg", "Anastasia"};
         String[] surNames = {"Ivanov", "Kostuhina", "Petrov", "Petriga", "Morgunov", "Sidyakin", "Kolpakova"};
         int[] ages = {25, 35, 40, 18, 50, 84, 20};
-        genders[] gender = {genders.MALE, genders.FEMALE, genders.MALE, genders.FEMALE, genders.MALE, genders.MALE, genders.FEMALE};
-        roles[] role = {roles.STAFF, roles.EXECUTIVE, roles.EXECUTIVE, roles.MANAGER, roles.STAFF, roles.STAFF, roles.MANAGER};
+        Genders[] gender = {Genders.MALE, Genders.FEMALE, Genders.MALE, Genders.FEMALE, Genders.MALE, Genders.MALE, Genders.FEMALE};
+        Roles[] role = {Roles.STAFF, Roles.EXECUTIVE, Roles.EXECUTIVE, Roles.MANAGER, Roles.STAFF, Roles.STAFF, Roles.MANAGER};
         String[] depts = {"Human Resources", "Laboratory", "Building", "Bookkeeping", "IT", "Design", "IT"};
         String[] eMails = {"qwe@as.com", "dhbh@as.com", "fjhv@as.com", "apo@as.com", "oooo@as.com", "12345@as.com", "9870@as.com"};
         long[] phones = {60385912347L, 85789621475L, 12369874501L, 45632897126L, 14263987521L, 81428409267L, 75693410098L};

@@ -9,6 +9,10 @@ public class MethodsStream {
     public static void main(String... args) {
         List<Employee> myEmployees = Employee.createShortList();
 
+        myEmployees.forEach(System.out::println);
+
+        System.out.println();
+
         //2 examples of map
         List<String> emails = myEmployees.stream().map(Employee::geteMail).collect(Collectors.toList());
         System.out.println("Emails for newsletter:");
@@ -22,22 +26,27 @@ public class MethodsStream {
         System.out.println("================================================");
 
         //2 examples of peek
-        System.out.println("Salary increase for IT department:");
-        myEmployees.stream().filter(x -> x.getDept().equals("IT")).peek(x -> x.setSalary((int) (x.getSalary() * 1.2))).forEach(System.out::println);
+        System.out.println("EXAMPLE of lazy");
+        List<Employee> result = myEmployees.stream().filter(x -> x.getRole().equals(Roles.STAFF)).peek(x -> System.out.println("After filter STAFF: " + x.getSurName()))
+                .filter(x -> x.getAge() > 30).peek(x -> System.out.println("After filter age > 20: " + x.getSurName()))
+                .collect(Collectors.toList());
+        System.out.println("STAFF with age over 30:");
+        result.forEach(x -> System.out.println(x.getSurName() + ", " + x.getRole() + ", " + x.getAge()));
 
         System.out.println("================================================");
 
-        System.out.println("Increase age:");
-        myEmployees.stream().peek(x -> x.setAge(x.getAge() + 1)).map(x -> x.getGivenName() + ' ' + x.getSurName() + ", " + x.getAge()).forEach(System.out::println);
+        List<Employee>females = myEmployees.stream().filter(e -> e.getGender().equals(Genders.FEMALE)).peek(e -> Accountant.paySalary(e)).collect(Collectors.toList());//forEach(x -> System.out.println(x.getSurName() + " is female"));
+        System.out.println("Female employees:");
+        females.forEach(x -> System.out.println(x.getSurName()));
 
         System.out.println("================================================");
 
         //2 examples of findFirst
-        System.out.println("Executive: " + myEmployees.stream().filter(x -> x.getRole().equals(roles.EXECUTIVE)).findFirst().get());
+        System.out.println("Executive: " + myEmployees.stream().filter(x -> x.getRole().equals(Roles.EXECUTIVE)).findFirst().get());
 
         System.out.println("================================================");
 
-        System.out.println("Male and staff: " + myEmployees.stream().filter(x -> x.getRole().equals(roles.STAFF)).filter(x -> x.getGender().equals(genders.MALE)).findFirst().get());
+        System.out.println("Male and staff: " + myEmployees.stream().filter(x -> x.getRole().equals(Roles.STAFF)).filter(x -> x.getGender().equals(Genders.MALE)).findFirst().get());
 
         System.out.println("================================================");
 
@@ -51,37 +60,37 @@ public class MethodsStream {
         System.out.println("================================================");
 
         //2 examples of max
-        System.out.println("Max age in IT department: " + myEmployees.stream().filter(x -> x.getDept().equals("IT")).mapToInt(x -> x.getAge()).max().getAsInt());
+        System.out.println("Max age in IT department: " + myEmployees.stream().filter(x -> x.getDept().equals("IT")).mapToInt(Employee::getAge).max().getAsInt());
 
         System.out.println("================================================");
 
-        System.out.println("Max salary in company: " + myEmployees.stream().mapToInt(x -> x.getSalary()).max().getAsInt());
+        System.out.println("Max salary in company: " + myEmployees.stream().mapToInt(Employee::getSalary).max().getAsInt());
 
         System.out.println("================================================");
 
         //2 examples of min
-        System.out.println("Min age in company: " + myEmployees.stream().mapToInt(x -> x.getAge()).min().getAsInt());
+        System.out.println("Min age in company: " + myEmployees.stream().mapToInt(Employee::getAge).min().getAsInt());
 
         System.out.println("================================================");
 
-        System.out.println("Min salary in IT department: " + myEmployees.stream().filter(x -> x.getDept().equals("IT")).mapToInt(x -> x.getSalary()).min().getAsInt());
+        System.out.println("Min salary in IT department: " + myEmployees.stream().filter(x -> x.getDept().equals("IT")).mapToInt(Employee::getSalary).min().getAsInt());
 
         System.out.println("================================================");
 
         //2 examples of average
-        System.out.println("Average salary in company: " + Math.round(myEmployees.stream().mapToInt(x -> x.getSalary()).average().getAsDouble()));
+        System.out.println("Average salary in company: " + Math.round(myEmployees.stream().mapToInt(Employee::getSalary).average().getAsDouble()));
 
         System.out.println("================================================");
 
-        System.out.println("Average age in company: " + Math.round(myEmployees.stream().mapToInt(x -> x.getAge()).average().getAsDouble()));
+        System.out.println("Average age in company: " + Math.round(myEmployees.stream().mapToInt(Employee::getAge).average().getAsDouble()));
 
         System.out.println("================================================");
 
         //2 examples of sum
-        System.out.println("Sum salaries: " + myEmployees.stream().mapToInt(x -> x.getSalary()).sum());
+        System.out.println("Sum salaries: " + myEmployees.stream().mapToInt(Employee::getSalary).sum());
 
         System.out.println("================================================");
 
-        System.out.println("Sum salaries of STAFF: " + myEmployees.stream().filter(x -> x.getRole().equals(roles.STAFF)).mapToInt(x -> x.getSalary()).sum());
+        System.out.println("Sum salaries of STAFF: " + myEmployees.stream().filter(x -> x.getRole().equals(Roles.STAFF)).mapToInt(Employee::getSalary).sum());
     }
 }

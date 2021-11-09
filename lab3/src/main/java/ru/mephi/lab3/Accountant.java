@@ -35,7 +35,7 @@ public class Accountant {
         Employee employee = new Employee();
         List<Employee> myList = employee.createShortList();
         myList.stream()
-                .filter(x -> x.getGender().equals(genders.FEMALE))
+                .filter(x -> x.getGender().equals(Genders.FEMALE))
                 .forEach(x -> Accountant.payPremium(x));
         System.out.println("");
         myList.stream()
@@ -47,11 +47,11 @@ public class Accountant {
                 .forEach(x -> Accountant.payPremium(x));
         System.out.println("");
         myList.stream()
-                .filter(x -> x.getRole().equals(roles.MANAGER))
+                .filter(x -> x.getRole().equals(Roles.MANAGER))
                 .forEach(x -> Accountant.paySalary(x));
         System.out.println("");
         myList.stream()
-                .filter(x -> x.getRole().equals(roles.STAFF))
+                .filter(x -> x.getRole().equals(Roles.STAFF))
                 .forEach(x -> Accountant.payPremium(x));
     }
 }

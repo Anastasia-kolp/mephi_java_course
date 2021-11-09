@@ -16,7 +16,7 @@ public class ApplicationLambda {
 
         Consumer<Employee> employeeConsumer = t -> System.out.println("Name: " + t.getGivenName() + " Surname: " + t.getSurName());
 
-        Supplier<Employee> employeeSupplier = () -> new Employee.Builder().setName("Phill").setSurName("Brown").setAge(32).setDept("Design").setAddress("Brown street, 12").setCity("Moscow").setCode((short) 199).setGender(genders.MALE).setPhone(12345678901L).build();
+        Supplier<Employee> employeeSupplier = () -> new Employee.Builder().setName("Phill").setSurName("Brown").setAge(32).setDept("Design").setAddress("Brown street, 12").setCity("Moscow").setCode((short) 199).setGender(Genders.MALE).setPhone(12345678901L).build();
 
         var list = employeeSupplier.get().createShortList();
 
